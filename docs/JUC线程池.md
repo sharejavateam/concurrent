@@ -1,34 +1,6 @@
-# 上篇文章
-
----
-
-[Java 并发学习笔记](https://www.notion.so/Java-c9f27c86bfa144ff8b2ea4182256f19d)
-
-# 版本
-
----
-
-`Java8`
-
-# PPT
-
----
-
-[模版.pptx](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/da51f8e9-1a6a-4ded-8bbd-7e22c1624ecb/.pptx)
-
 # 1 前言
 
 ---
-
-前文
-
-[多线程基础](https://www.notion.so/f05485504fdb401a8952fec2c87872ca)
-
-[JUC 原子类](https://www.notion.so/JUC-2c88fed298ba43629cc5afcbdd36e037)
-
-[JUC 锁](https://www.notion.so/JUC-c1d434a31ee4437eb38d0e0f8f059d41)
-
-[JUC 集合](https://www.notion.so/JUC-7296959537644503be0b14698332ae92)
 
 我们使用线程的时候就去创建一个线程，这样实现起来非常简便，但是就会有一个问题：
 
@@ -159,11 +131,11 @@ IO密集型任务CPU使用率并不高，因此可以让CPU在等待IO的时候�
 
 ### 3.2.1 线程池架构图
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7592ac11-0403-4d4e-88bb-680cb57018ed/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/7592ac11-0403-4d4e-88bb-680cb57018ed/Untitled.png)
+![线程池类图](img/线程池类图.png)
 
 ### 3.2.2 接口介绍
 
-[线程池相关接口介绍](https://www.notion.so/19b0f8126e794794a7e4af59d26de3cc)
+[线程池相关接口介绍](线程池相关接口介绍.md)
 
 ### 3.2.3 FixedThreadPool 示例
 
@@ -541,9 +513,7 @@ ForkJoinPool支持将一个任务拆分成多个“小任务”并行计算，�
 
 当向线程池提交一个任务之后，线程池是如何处理这个任务的呢？线程池的处理流程如下。
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2add8cd0-d1a3-4747-a3ba-f685ed53270d/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2add8cd0-d1a3-4747-a3ba-f685ed53270d/Untitled.png)
-
-图 3-2-1 线程池的主要处理流程
+![线程池的主要处理流程图.png](img/线程池的主要处理流程图.png)
 
 从上图中可以看出流程是这样的：
 
@@ -551,9 +521,7 @@ ForkJoinPool支持将一个任务拆分成多个“小任务”并行计算，�
 2. 线程池判断工作队列是否已满。如果工作队列没有满，则将新提交的任务存储在这个工作队列里。如果工作队列满了，则进入下个流程。
 3. 线程池判断线程池的线程是否都处于饱和工作状态。如果没有，则创建一个新的工作线程来执行任务。如果已经满了，则交给饱和策略来处理这个任务。
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/57b0f6c6-934d-4fdd-b2d2-7abad7778c7c/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/57b0f6c6-934d-4fdd-b2d2-7abad7778c7c/Untitled.png)
-
-图 3-2-2 ThreadPoolExecutor 执行示意图
+![ThreadPoolExecutor执行示意图.png](img/ThreadPoolExecutor执行示意图.png)
 
 `ThreadPoolExecutor` 执行 `execute` 方法分下面 4 中情况。
 
@@ -566,7 +534,7 @@ ForkJoinPool支持将一个任务拆分成多个“小任务”并行计算，�
 
 ## 3.4 源码解析
 
-[Java8 ThreadPoolExecutor 源码解析](https://www.notion.so/Java8-ThreadPoolExecutor-0284f2c55d814fdc9450efd8a41cc974)
+[Java8 ThreadPoolExecutor 源码解析](Java8ThreadPoolExecutor源码解析.md)
 
 [Java8 ScheduledThreadPoolExecutor 详解](https://www.notion.so/Java8-ScheduledThreadPoolExecutor-102670ddec0f42bdb9d01a23125f5974)
 
