@@ -1,4 +1,4 @@
-package com.examples.concurrent;
+package com.examples.concurrent.pool;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;

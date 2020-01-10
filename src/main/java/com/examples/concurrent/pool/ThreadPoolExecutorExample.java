@@ -1,4 +1,4 @@
-package com.examples.concurrent;
+package com.examples.concurrent.pool;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 

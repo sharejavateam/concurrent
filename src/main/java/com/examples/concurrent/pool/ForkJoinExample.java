@@ -1,4 +1,4 @@
-package com.examples.concurrent;
+package com.examples.concurrent.pool;
 
 import java.util.Random;
 import java.util.concurrent.*;
