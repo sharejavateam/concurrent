@@ -1,20 +1,8 @@
-# 上篇文章
-
----
-
-[JUC 线程池](https://www.notion.so/JUC-84df19e6989345e9967e8537457a2336)
-
-# 版本
-
----
-
-`Java8`
-
 # 1 线程池类图
 
 ---
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2d52dcbe-a484-412b-85e1-8dd72f3e809b/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2d52dcbe-a484-412b-85e1-8dd72f3e809b/Untitled.png)
+![线程池类图.png](img/线程池类图.png)
 
 # 2 ThreadPoolExecutor 源码分析
 
@@ -47,9 +35,15 @@
 
 ThreadPoolExecutor把**线程池状态**和**线程池容量**打包成一个int型变量，如下图所示。
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/195539e5-33f9-44a5-91fc-9d1f5b8589a7/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/195539e5-33f9-44a5-91fc-9d1f5b8589a7/Untitled.png)
+![ctl值原理.png](img/ctl值原理.png)
 
-[线程池状态位](https://www.notion.so/b4a8433331474c6dbc1a2b1f63c772ea)
+| 状态 | 高位值枚举 | 正负性 |
+| --- | --- | --- |
+| RUNNING    | 111 | 负数（-536870912） |
+| SHUTDOWN   | 000 | 0                  |
+| STOP       | 001 | 正数（536870912） |
+| TIDYING    | 010 | 正数（1073741824） |
+| TERMINATED | 011 | 正数（1610612736） |
 
 因此在状态值的排布上可以知道 **TERMINATED > TIDYING > STOP >SHUTDOWN > RUNNING**
 
@@ -70,7 +64,7 @@ ThreadPoolExecutor把**线程池状态**和**线程池容量**打包成一个int
 
 总结为下图：
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c8284c44-8b82-4ef3-9745-8a4a8996f48e/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c8284c44-8b82-4ef3-9745-8a4a8996f48e/Untitled.png)
+![线程池状态生命周期.png](img/线程池状态生命周期.png)
 
 ## ctl 相关方法
 
@@ -178,7 +172,7 @@ ThreadPoolExecutor把**线程池状态**和**线程池容量**打包成一个int
             reject(command);
     }
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/19b687d1-dd76-4daa-a003-eed6ea7c9249/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/19b687d1-dd76-4daa-a003-eed6ea7c9249/Untitled.png)
+![execute()流程图.png](img/execute()流程图.png)
 
 简单来说，在执行execute()方法时如果状态一直是`RUNNING`时，的执行过程如下：
 
@@ -606,7 +600,7 @@ getTask方法返回null时，在runWorker方法中会跳出while循环，然后�
 
 至此，processWorkerExit执行完之后，工作线程被销毁，以上就是整个工作线程的生命周期，从execute方法开始，Worker使用ThreadFactory创建新的工作线程，runWorker通过getTask获取任务，然后执行任务，如果getTask返回null，进入processWorkerExit方法，整个线程结束，如图所示：
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d0343788-05bb-459b-acf5-8c213472fed9/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d0343788-05bb-459b-acf5-8c213472fed9/Untitled.png)
+![execute()流程图_1.png](img/execute()流程图_1.png)
 
 ## tryTerminate 方法
 
@@ -776,13 +770,3 @@ shutdownNow方法执行完之后调用tryTerminate方法，该方法在上文已
 在向线程池提交任务时，除了execute方法，还有一个submit方法，submit方法会返回一个Future对象用于获取返回值，有关Future和Callable在下文中。
 
 [JUC 之 Future 和 Callable](https://www.notion.so/JUC-Future-Callable-0c238c89e6cb4f62ae74137c0bad18cf)
-
-# 参考资源
-
----
-
-[Java多线程系列目录(共43篇) - 如果天空不死 - 博客园](https://www.cnblogs.com/skywang12345/p/java_threads_category.html)
-
-[深入浅出Java线程池ThreadPoolExecutor](https://juejin.im/post/5aabb948f265da237506a7f5#heading-6)
-
-[深入理解 Java 线程池：ThreadPoolExecutor](https://juejin.im/entry/58fada5d570c350058d3aaad)
