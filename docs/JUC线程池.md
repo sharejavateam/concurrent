@@ -571,13 +571,3 @@ ForkJoinPool支持将一个任务拆分成多个“小任务”并行计算，�
 [Java8 ScheduledThreadPoolExecutor 详解](https://www.notion.so/Java8-ScheduledThreadPoolExecutor-102670ddec0f42bdb9d01a23125f5974)
 
 [ForkJoinPool 详解](https://www.notion.so/ForkJoinPool-37cd1435e25f4924b6498ba2ac6bea27)
-
-# 参考资源
-
----
-
-[SegmentFault](https://segmentfault.com/blog/ressmix_multithread?page=2)
-
-[使用CompletableFuture异步编程 - 郑志彬的博客 | Arganzheng's Blog](http://arganzheng.life/writing-asynchronous-code-with-completablefuture.html)
-
-[Java多线程系列目录(共43篇) - 如果天空不死 - 博客园](https://www.cnblogs.com/skywang12345/p/java_threads_category.html)
